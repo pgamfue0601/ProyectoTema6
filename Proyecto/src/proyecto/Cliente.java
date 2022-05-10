@@ -21,23 +21,32 @@ public class Cliente implements Serializable{
     private String entrenador;
     private boolean profesional;
     private genero genero;
+    private Icon foto;
 
     
     
-    public Cliente(String n, String fi, int mem, boolean pro, genero g){
-        this(n,fi,mem,null,pro,g);
+    public Cliente(String n, String fi, int mem, boolean pro, genero g, Icon f){
+        this(n,fi,mem,null,pro,g,f);
         entrenador="--No tiene entrenador--";
 
 
     }
-    public Cliente(String n, String fi, int mem, String e, boolean pro, genero g){
+    public Cliente(String n, String fi, int mem, String e, boolean pro, genero g, Icon f){
         nombre=n;
         fechainscripcion=fi;
         membresia=mem;
         entrenador=e;
         profesional=pro;
         genero=g;
-        
+        foto=f;
+    }
+
+    public Icon getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Icon foto) {
+        this.foto = foto;
     }
 
     public String getFechainscripcion() {

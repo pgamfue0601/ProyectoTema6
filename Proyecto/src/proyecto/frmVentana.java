@@ -48,12 +48,13 @@ public class frmVentana extends javax.swing.JFrame {
     }
       
     private void rellenarClientes(){
-        Cliente c1=new Cliente("Mario","24/04/2022",2,false,genero.HOMBRE);
-        Cliente c2=new Cliente("Laura","12/02/2022",3,"Alfredo",true,genero.MUJER);
-        Cliente c3=new Cliente("Alex","12/03/2021",1,false,genero.NEUTRO);
+        Cliente c1=new Cliente("Mario","24/04/2022",2,false,genero.HOMBRE,null);
+        Cliente c2=new Cliente("Toni","12/02/2022",3,"Alfredo",true,genero.HOMBRE,null);
+        Cliente c3=new Cliente("Alex","12/03/2021",1,false,genero.NEUTRO,null);
         listaClientes.addElement(c1);
         listaClientes.addElement(c2);
         listaClientes.addElement(c3);
+
        
     }
     /**
@@ -84,6 +85,9 @@ public class frmVentana extends javax.swing.JFrame {
         optHombre = new javax.swing.JRadioButton();
         optMujer = new javax.swing.JRadioButton();
         optNeutro = new javax.swing.JRadioButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblFoto = new javax.swing.JLabel();
+        cmdFoto = new javax.swing.JButton();
         cmdNuevo = new javax.swing.JButton();
         cmdModificar = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
@@ -164,11 +168,37 @@ public class frmVentana extends javax.swing.JFrame {
         optGrupo.add(optNeutro);
         optNeutro.setText("NEUTRO");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FOTO DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 2, 14))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        cmdFoto.setText("CARGAR FOTO");
+        cmdFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdFotoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLayout.createSequentialGroup()
+            .addGroup(pnlDatosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDatosLayout.createSequentialGroup()
@@ -178,11 +208,11 @@ public class frmVentana extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
                         .addGap(31, 31, 31)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEntrenador)
-                            .addComponent(cmbMembresia, 0, 334, Short.MAX_VALUE)
-                            .addComponent(txtFecha)
-                            .addComponent(txtNombre)))
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbMembresia, javax.swing.GroupLayout.Alignment.LEADING, 0, 225, Short.MAX_VALUE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEntrenador)))
                     .addComponent(chkPro)
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addComponent(optHombre)
@@ -190,35 +220,44 @@ public class frmVentana extends javax.swing.JFrame {
                         .addComponent(optMujer)
                         .addGap(18, 18, 18)
                         .addComponent(optNeutro)))
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(cmbMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(optHombre)
+                            .addComponent(optMujer)
+                            .addComponent(optNeutro))
+                        .addGap(39, 39, 39)
+                        .addComponent(chkPro)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(cmbMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(optHombre)
-                    .addComponent(optMujer)
-                    .addComponent(optNeutro))
-                .addGap(39, 39, 39)
-                .addComponent(chkPro)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addComponent(cmdFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         cmdNuevo.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -314,9 +353,9 @@ public class frmVentana extends javax.swing.JFrame {
                                         .addGap(53, 53, 53)
                                         .addComponent(cmdBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(447, 447, 447)
+                        .addGap(459, 459, 459)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,9 +372,9 @@ public class frmVentana extends javax.swing.JFrame {
                     .addComponent(cmdNuevo)
                     .addComponent(cmdModificar)
                     .addComponent(cmdBorrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -350,8 +389,9 @@ public class frmVentana extends javax.swing.JFrame {
         int membresia=cmbMembresia.getSelectedIndex();
         String entrenador= txtEntrenador.getText();
         genero g=this.getGeneroSeleccionado();
+        Icon f=lblFoto.getIcon();
         //Creamos el cliente
-        Cliente c=new Cliente(nombre,fecha,membresia,entrenador,profesional,g);
+        Cliente c=new Cliente(nombre,fecha,membresia,entrenador,profesional,g,f);
         //Añadimos el cliente al DefaultListModel
         listaClientes.addElement(c);
     }//GEN-LAST:event_cmdNuevoActionPerformed
@@ -360,6 +400,30 @@ public class frmVentana extends javax.swing.JFrame {
         cmdNuevo.setEnabled(b);
         cmdModificar.setEnabled(!b);
         cmdBorrar.setEnabled(!b);
+    }
+    
+    private void cargarFoto(){
+        //Crear una ventana para elegir archivos (JFileChooser)
+        JFileChooser ventana = new JFileChooser();
+        // Llamar a un método para que se vea la ventana
+        int resultado = ventana.showOpenDialog(this);
+        //Comprobamos que el usuario ha elegido un archivo y ha pulsado
+        //el boton de aceptar.
+        if(resultado==JFileChooser.APPROVE_OPTION){
+            //preguntamos a la ventana el archivo seleccionado
+            File archivo = ventana.getSelectedFile();
+            try {
+                //Carga la imagen seleccionada
+                BufferedImage imagen = ImageIO.read(archivo);
+                //Convertimos el BufferedImage en icono (ImageIcon)
+                ImageIcon icono=new ImageIcon(imagen);
+                //Ponemos la imagen en la etiqueta
+                lblFoto.setIcon(icono);
+            } catch (IOException error) {
+                //Salta el error en una ventana de error
+                JOptionPane.showMessageDialog(this, "Error al cargar la imagen (No se encuentra el archivo.)","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
     
     private void mostrarClientes(){
@@ -372,6 +436,7 @@ public class frmVentana extends javax.swing.JFrame {
         cmbMembresia.setSelectedIndex(c.getMembresia());
         txtEntrenador.setText(c.getEntrenador());
         chkPro.setSelected(c.isProfesional());
+        lblFoto.setIcon(c.getFoto());
         switch(c.getGenero()){
             case HOMBRE:
                 optHombre.setSelected(true);
@@ -404,6 +469,7 @@ public class frmVentana extends javax.swing.JFrame {
         cmbMembresia.setSelectedIndex(0);
         chkPro.setSelected(false);
         optGrupo.clearSelection();
+        lblFoto.setIcon(null);
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
@@ -414,11 +480,13 @@ public class frmVentana extends javax.swing.JFrame {
         int membresiaNueva=cmbMembresia.getSelectedIndex();
         boolean profesional=chkPro.isSelected();
         genero g= this.getGeneroSeleccionado();
+        Icon f=lblFoto.getIcon();
         c.setNombre(nombreNuevo);
         c.setFecha(fechaNueva);
         c.setMembresia(membresiaNueva);
         c.setProfesional(profesional);
         c.setGenero(g);
+        c.setFoto(f);
         //Actualizar el JList
         lstListaClientes.repaint();
     }//GEN-LAST:event_cmdModificarActionPerformed
@@ -432,11 +500,6 @@ public class frmVentana extends javax.swing.JFrame {
         //de la esquina superior derecha.
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        //Para cerrar la ventana
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         //Para abrir el archivo que hayamos creado de nuestra lista
@@ -493,6 +556,15 @@ public class frmVentana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lstListaClientesMouseClicked
 
+    private void cmdFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFotoActionPerformed
+        cargarFoto();
+    }//GEN-LAST:event_cmdFotoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        //Para cerrar la ventana
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -532,6 +604,7 @@ public class frmVentana extends javax.swing.JFrame {
     private javax.swing.JCheckBox chkPro;
     private javax.swing.JComboBox<String> cmbMembresia;
     private javax.swing.JButton cmdBorrar;
+    private javax.swing.JButton cmdFoto;
     private javax.swing.JButton cmdModificar;
     private javax.swing.JButton cmdNuevo;
     private javax.swing.JButton cmdSeleccionar;
@@ -549,7 +622,9 @@ public class frmVentana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblFoto;
     private javax.swing.JList<Cliente> lstListaClientes;
     private javax.swing.ButtonGroup optGrupo;
     private javax.swing.JRadioButton optHombre;
