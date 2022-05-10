@@ -68,7 +68,7 @@ public class frmVentana extends javax.swing.JFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        optGrupo = new javax.swing.ButtonGroup();
         cmdSeleccionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         pnlDatos = new javax.swing.JPanel();
@@ -145,18 +145,23 @@ public class frmVentana extends javax.swing.JFrame {
         });
 
         txtFecha.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        txtFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaActionPerformed(evt);
+            }
+        });
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
         txtEntrenador.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-        buttonGroup1.add(optHombre);
+        optGrupo.add(optHombre);
         optHombre.setText("HOMBRE");
 
-        buttonGroup1.add(optMujer);
+        optGrupo.add(optMujer);
         optMujer.setText("MUJER");
 
-        buttonGroup1.add(optNeutro);
+        optGrupo.add(optNeutro);
         optNeutro.setText("NEUTRO");
 
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
@@ -190,23 +195,23 @@ public class frmVentana extends javax.swing.JFrame {
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(cmbMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(optHombre)
                     .addComponent(optMujer)
@@ -250,7 +255,7 @@ public class frmVentana extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(lstListaClientes);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
 
         jMenuItem1.setText("Abrir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -333,25 +338,84 @@ public class frmVentana extends javax.swing.JFrame {
 
     
     private void cmdNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoActionPerformed
-        //Aquí hace una comprobación de que si el cliente es un atleta profesional.
-        
-        
+        //Guardo en variables lo que el usuario ha escrito en la pantalla
+        String nombre=txtNombre.getText();
+        String fecha=txtFecha.getText();
+        boolean profesional = chkPro.isSelected();
+        int membresia=cmbMembresia.getSelectedIndex();
+        String entrenador= txtEntrenador.getText();
+        genero g=this.getGeneroSeleccionado();
+        //Creamos el cliente
+        Cliente c=new Cliente(nombre,fecha,membresia,entrenador,profesional,g);
+        //Añadimos el cliente al DefaultListModel
+        listaClientes.addElement(c);
     }//GEN-LAST:event_cmdNuevoActionPerformed
 
+    private void habilitarBotones(boolean b){
+        cmdNuevo.setEnabled(b);
+        cmdModificar.setEnabled(!b);
+        cmdBorrar.setEnabled(!b);
+    }
+    
+    private void mostrarClientes(){
+        //Pregunto al JList el objeto Cliente que tiene seleccionado
+        Cliente c =lstListaClientes.getSelectedValue();
+        //Comprobamos de que haya un Cliente seleccionado
+        if(c!=null){
+        txtNombre.setText(c.getNombre());
+        txtFecha.setText(c.getFecha());
+        cmbMembresia.setSelectedIndex(c.getMembresia());
+        txtEntrenador.setText(c.getEntrenador());
+        chkPro.setSelected(c.isProfesional());
+        switch(c.getGenero()){
+            case HOMBRE:
+                optHombre.setSelected(true);
+                break;
+            case MUJER:
+                optMujer.setSelected(true);
+                break;
+            case NEUTRO:
+                optNeutro.setSelected(true);
+                break;
+            default:
+                optNeutro.setSelected(true);
+                break;    
+        }
+        this.habilitarBotones(false);
+        }
+    }
+    
     private void cmdSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSeleccionarActionPerformed
-        
+        mostrarClientes();
     }//GEN-LAST:event_cmdSeleccionarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
-        //Aquí se hace una comprobación para ver si se está seleccionando a 
-        //alguien de la lista para eliminarlo
-        
+
+        Cliente c = lstListaClientes.getSelectedValue();
+        listaClientes.removeElement(c);
+        this.habilitarBotones(true);
+        txtNombre.setText("");
+        txtFecha.setText("");
+        cmbMembresia.setSelectedIndex(0);
+        chkPro.setSelected(false);
+        optGrupo.clearSelection();
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
-        //Aquí se hace una comprobación para ver si se está seleccionando a
-        //alguien de la lista para modificar sus datos.
-        
+        //recupero el objeto seleccionado en el JList
+        Cliente c = lstListaClientes.getSelectedValue();
+        String nombreNuevo=txtNombre.getText();
+        String fechaNueva=txtFecha.getText();
+        int membresiaNueva=cmbMembresia.getSelectedIndex();
+        boolean profesional=chkPro.isSelected();
+        genero g= this.getGeneroSeleccionado();
+        c.setNombre(nombreNuevo);
+        c.setFecha(fechaNueva);
+        c.setMembresia(membresiaNueva);
+        c.setProfesional(profesional);
+        c.setGenero(g);
+        //Actualizar el JList
+        lstListaClientes.repaint();
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmbMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMembresiaActionPerformed
@@ -365,10 +429,12 @@ public class frmVentana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        //Para cerrar la ventana
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //Para abrir el archivo que hayamos creado de nuestra lista
         JFileChooser filechooser = new JFileChooser();
         int resultado = filechooser.showOpenDialog(this);
         if(resultado==JFileChooser.APPROVE_OPTION){
@@ -391,6 +457,7 @@ public class frmVentana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        //Para guardar el contenido de nuestra lista
         JFileChooser filechooser = new JFileChooser();
         int resultado = filechooser.showSaveDialog(this);
         if(resultado==JFileChooser.APPROVE_OPTION){
@@ -410,6 +477,10 @@ public class frmVentana extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
+        // ESTO NO TENDRÁ FUNCIÓN, SE HA CREADO POR ERROR
+    }//GEN-LAST:event_txtFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -447,7 +518,6 @@ public class frmVentana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chkPro;
     private javax.swing.JComboBox<String> cmbMembresia;
     private javax.swing.JButton cmdBorrar;
@@ -470,6 +540,7 @@ public class frmVentana extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Cliente> lstListaClientes;
+    private javax.swing.ButtonGroup optGrupo;
     private javax.swing.JRadioButton optHombre;
     private javax.swing.JRadioButton optMujer;
     private javax.swing.JRadioButton optNeutro;

@@ -21,9 +21,12 @@ public class Cliente implements Serializable{
     private String entrenador;
     private boolean profesional;
     private genero genero;
+
+    
     
     public Cliente(String n, String fi, int mem, boolean pro, genero g){
         this(n,fi,mem,null,pro,g);
+        entrenador="--No tiene entrenador--";
 
 
     }
@@ -69,6 +72,14 @@ public class Cliente implements Serializable{
         this.entrenador = entrenador;
     }
 
+    public genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(genero genero) {
+        this.genero = genero;
+    }
+    
     public String getNombre() {
         return nombre;
     }
