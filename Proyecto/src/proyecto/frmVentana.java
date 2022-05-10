@@ -253,6 +253,11 @@ public class frmVentana extends javax.swing.JFrame {
             }
         });
 
+        lstListaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstListaClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lstListaClientes);
 
         jMenu1.setText("Archivo");
@@ -481,6 +486,12 @@ public class frmVentana extends javax.swing.JFrame {
     private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
         // ESTO NO TENDRÁ FUNCIÓN, SE HA CREADO POR ERROR
     }//GEN-LAST:event_txtFechaActionPerformed
+
+    private void lstListaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstListaClientesMouseClicked
+        if(evt.getClickCount()==2){
+            this.mostrarClientes();
+        }
+    }//GEN-LAST:event_lstListaClientesMouseClicked
 
     /**
      * @param args the command line arguments
