@@ -70,6 +70,9 @@ public class frmVentana extends javax.swing.JFrame {
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         optGrupo = new javax.swing.ButtonGroup();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         cmdSeleccionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         pnlDatos = new javax.swing.JPanel();
@@ -99,6 +102,10 @@ public class frmVentana extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -108,6 +115,12 @@ public class frmVentana extends javax.swing.JFrame {
 
         jCheckBoxMenuItem3.setSelected(true);
         jCheckBoxMenuItem3.setText("jCheckBoxMenuItem3");
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplicación Gimnasio");
@@ -326,6 +339,34 @@ public class frmVentana extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Editar");
+
+        jMenuItem4.setText("Nuevo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem4);
+
+        jMenuItem5.setText("Modificar");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuItem6.setText("Borrar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -565,6 +606,49 @@ public class frmVentana extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        String nombre=txtNombre.getText();
+        String fecha=txtFecha.getText();
+        boolean profesional = chkPro.isSelected();
+        int membresia=cmbMembresia.getSelectedIndex();
+        String entrenador= txtEntrenador.getText();
+        genero g=this.getGeneroSeleccionado();
+        Icon f=lblFoto.getIcon();
+        Cliente c=new Cliente(nombre,fecha,membresia,entrenador,profesional,g,f);
+        listaClientes.addElement(c);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        //recupero el objeto seleccionado en el JList
+        Cliente c = lstListaClientes.getSelectedValue();
+        String nombreNuevo=txtNombre.getText();
+        String fechaNueva=txtFecha.getText();
+        int membresiaNueva=cmbMembresia.getSelectedIndex();
+        boolean profesional=chkPro.isSelected();
+        genero g= this.getGeneroSeleccionado();
+        Icon f=lblFoto.getIcon();
+        c.setNombre(nombreNuevo);
+        c.setFecha(fechaNueva);
+        c.setMembresia(membresiaNueva);
+        c.setProfesional(profesional);
+        c.setGenero(g);
+        c.setFoto(f);
+        //Actualizar el JList
+        lstListaClientes.repaint();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Cliente c = lstListaClientes.getSelectedValue();
+        listaClientes.removeElement(c);
+        this.habilitarBotones(true);
+        txtNombre.setText("");
+        txtFecha.setText("");
+        cmbMembresia.setSelectedIndex(0);
+        chkPro.setSelected(false);
+        optGrupo.clearSelection();
+        lblFoto.setIcon(null);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -618,10 +702,17 @@ public class frmVentana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFoto;
