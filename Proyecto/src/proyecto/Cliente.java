@@ -27,7 +27,9 @@ public class Cliente implements Serializable{
     
     public Cliente(String n, String fi, int mem, boolean pro, genero g, Icon f){
         this(n,fi,mem,null,pro,g,f);
-        entrenador="--No tiene entrenador--";
+        if(entrenador==null||entrenador==""){
+            entrenador="--No tiene entrenador--";
+        }
 
 
     }

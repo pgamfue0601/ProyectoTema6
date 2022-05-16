@@ -155,18 +155,8 @@ public class frmVentana extends javax.swing.JFrame {
 
         cmbMembresia.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbMembresia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NoMembresia", "Basic", "Medium", "Hardcore" }));
-        cmbMembresia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMembresiaActionPerformed(evt);
-            }
-        });
 
         txtFecha.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        txtFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaActionPerformed(evt);
-            }
-        });
 
         txtNombre.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
@@ -532,10 +522,6 @@ public class frmVentana extends javax.swing.JFrame {
         lstListaClientes.repaint();
     }//GEN-LAST:event_cmdModificarActionPerformed
 
-    private void cmbMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMembresiaActionPerformed
-        // ESTO NO TENDRÁ FUNCIÓN, SE HA CREADO POR ERROR.
-    }//GEN-LAST:event_cmbMembresiaActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Para cerrar la ventana si se prefiere en vez de de darle a la "X" 
         //de la esquina superior derecha.
@@ -586,10 +572,6 @@ public class frmVentana extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
-        // ESTO NO TENDRÁ FUNCIÓN, SE HA CREADO POR ERROR
-    }//GEN-LAST:event_txtFechaActionPerformed
 
     private void lstListaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstListaClientesMouseClicked
         if(evt.getClickCount()==2){
